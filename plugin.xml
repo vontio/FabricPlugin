@@ -8,7 +8,6 @@
     <keywords>cordova,fabric,craslytics,answers,events,device,ios,android</keywords>
 
     <preference name="FABRIC_API_KEY" />
-    <preference name="FABRIC_API_SECRET" />
 
     <hook type="after_plugin_install" src="hooks/after_plugin_install.js" />
     <hook type="before_plugin_uninstall" src="hooks/before_plugin_uninstall.js" />

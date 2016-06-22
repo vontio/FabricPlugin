@@ -9,20 +9,39 @@ module.exports = {
 
         var buildGradle = utilities.readBuildGradle();
 
-        buildGradle +=  [
-            "// Fabric Cordova Plugin - Start Fabric Build Tools ",
-            "buildscript {",
-            "    repositories {",
-            "        maven { url 'https://maven.fabric.io/public' }",
-            "    }",
-            "    dependencies {",
-            "        classpath 'io.fabric.tools:gradle:1.+'",
-            "    }",
-            "}",
-            "",
-            "apply plugin: 'io.fabric'",
-            "// Fabric Cordova Plugin - End Fabric Build Tools",
-        ].join("\n");
+        buildGradle += 
+"\n// Fabric Cordova Plugin - Start Fabric Build Tools\n\
+buildscript {\n\
+    repositories {\n\
+        maven { url 'https://maven.fabric.io/public' }\n\
+    }\n\
+\n\
+    dependencies {\n\
+        classpath 'io.fabric.tools:gradle:1.+'\n\
+    }\n\
+}\n\
+\n\
+apply plugin: 'io.fabric'\n\
+\n\
+repositories {\n\
+    maven { url 'https://maven.fabric.io/public' }\n\
+}\n\
+\n\
+dependencies {\n\
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.7@aar') {\n\
+        transitive = true;\n\
+    }\n\
+    compile('com.crashlytics.sdk.android:crashlytics-ndk:1.1.3@aar') {\n\
+        transitive = true;\n\
+    }\n\
+}\n\
+\n\
+crashlytics {\n\
+    enableNdk true\n\
+    androidNdkOut 'src/main/obj'\n\
+    androidNdkLibsOut 'src/main/libs'\n\
+}\n\
+// Fabric Cordova Plugin - End Fabric Build Tools\n";
 
         utilities.writeBuildGradle(buildGradle);
     },

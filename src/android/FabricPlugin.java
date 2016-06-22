@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.ndk.CrashlyticsNdk;
 import com.crashlytics.android.answers.AddToCartEvent;
 import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.AnswersEvent;
@@ -37,7 +38,11 @@ public class FabricPlugin extends CordovaPlugin {
 
 	@Override
 	protected void pluginInitialize() {
-		Fabric.with(this.cordova.getActivity().getApplicationContext(), new Crashlytics(), new Answers());
+		final Fabric fabric = new Fabric.Builder(this.cordova.getActivity().getApplicationContext())
+        .kits(new Crashlytics(), new CrashlyticsNdk(), new Answers())
+        .debuggable(false)
+        .build();
+		Fabric.with(fabric);
 	}
 
 	@Override
